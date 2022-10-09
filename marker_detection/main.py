@@ -35,7 +35,7 @@ def process_image(image: np.array) -> np.array:
     draw_rect(image, red_mask)
     draw_rect(image, green_mask)
 
-    return green_mask
+    return green_mask | red_mask
 
 
 def main():
