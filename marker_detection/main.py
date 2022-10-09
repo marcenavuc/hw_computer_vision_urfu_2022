@@ -6,19 +6,18 @@ GREEN_COLOR = (0, 255, 0)
 
 
 def process_image(image: np.array) -> np.array:
-    green_marker_mask: np.array = (
-        (image[:, :, 0] < 90)
-      & (image[:, :, 1] > 95)
-      & (image[:, :, 2] < 100)
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+    red_mask = cv2.inRange(hsv,
+                           np.array([0, 90, 140]),
+                           np.array([20, 255, 255])
     )
-    red_marker_mask: np.array = (
-        (image[:, :, 0] > 5)
-      & (image[:, :, 1] < 250)
-      & (image[:, :, 2] < 255)
+    green_mask = cv2.inRange(hsv,
+                             np.array([40, 60, 20]),
+                             np.array([90, 255, 255])
     )
-    result = np.zeros(shape=image.shape)
-    result[green_marker_mask | ~red_marker_mask] = 255
-    return result
+
+    return green_mask | red_mask
 
 
 def main():
