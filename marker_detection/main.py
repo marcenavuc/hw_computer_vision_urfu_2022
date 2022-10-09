@@ -29,8 +29,8 @@ def process_image(image: np.array) -> np.array:
                            np.array([20, 255, 255])
     )
     green_mask = cv2.inRange(hsv,
-                             np.array([40, 70, 20]),
-                             np.array([80, 255, 255])
+                             np.array([40, 70, 100]),
+                             np.array([90, 180, 180])
     )
     draw_rect(image, red_mask)
     draw_rect(image, green_mask)
